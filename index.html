@@ -261,15 +261,18 @@
   buildingScreen.classList.add('hidden');
   document.getElementById('menu').classList.remove('hidden');
   homeScreen.classList.add('active');
-  document.removeEventListener('click', proceedToHome);
+  document.removeEventListener('click', landingClickHandler);
   document.removeEventListener('keydown', proceedToHome);
 };
 
-    document.addEventListener('click', (e) => {
+    function landingClickHandler(e) {
   if (!e.target.closest('.menu')) {
     dropdownMenu.classList.remove('show');
   }
-});
+  proceedToHome();
+}
+
+document.addEventListener('click', landingClickHandler);
 
     document.addEventListener('keydown', proceedToHome);
 
