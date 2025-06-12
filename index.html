@@ -41,25 +41,24 @@
       0% { opacity: 0; transform: scale(0.95); }
       100% { opacity: 1; transform: scale(1); }
     }
-    
-    }
-    .logo {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-    }
+.logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  width: 90vw;
+  height: auto;
+}
     .building-screen {
       font-size: 5.33rem;
       opacity: 0;
       transform: scale(0.95);
       animation: showBuilding 1.5s ease forwards;
-      animation-delay: 4.5s;
+      
     }
     @keyframes showBuilding {
-      0% { opacity: 0; transform: scale(0.95); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-    }
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
     .home-screen, .about-screen, .contact-screen {
       display: none;
       flex-direction: column;
@@ -158,6 +157,10 @@
       font-weight: bold;
     }
     @media (max-width: 768px) {
+  .logo {
+    width: 90vw;
+    height: auto;
+  }
       .building-screen {
         font-size: 3rem;
         padding: 1rem;
@@ -191,19 +194,19 @@
     We're Building Something
   </div>
 
-  <div class="screen home-screen" id="homeScreen">
-    <div class="menu">
-      <button class="menu-button" onclick="toggleDropdown()" aria-label="Menu" aria-expanded="false">
-        <div></div>
-        <div></div>
-        <div></div>
-      </button>
-      <div class="dropdown" id="dropdownMenu">
-        <a href="#" id="link-home" onclick="navigate('home')">Home</a>
-        <a href="#" id="link-about" onclick="navigate('about')">About</a>
-        <a href="#" id="link-contact" onclick="navigate('contact')">Contact</a>
-      </div>
-    </div>
+  <div class="menu">
+  <button class="menu-button" onclick="toggleDropdown()" aria-label="Menu" aria-expanded="false">
+    <div></div>
+    <div></div>
+    <div></div>
+  </button>
+  <div class="dropdown" id="dropdownMenu">
+    <a href="#" id="link-home" onclick="navigate('home')">Home</a>
+    <a href="#" id="link-about" onclick="navigate('about')">About</a>
+    <a href="#" id="link-contact" onclick="navigate('contact')">Contact</a>
+  </div>
+</div>
+<div class="screen home-screen" id="homeScreen">
     <img src="logo.jpeg" alt="Adirondack Lumber Company Logo" class="homepage-logo" />
     <div class="embellishment">Established in the Heart of the Adirondacks</div>
   </div>
@@ -239,9 +242,9 @@
   logoScreen.classList.remove('active');
   logoScreen.style.transition = 'opacity 1s ease';
   logoScreen.style.opacity = 0;
-  setTimeout(() => logoScreen.classList.add('hidden'), 1000);
   buildingScreen.classList.remove('hidden');
-  setTimeout(() => buildingScreen.classList.add('active'), 100);
+  buildingScreen.classList.add('active');
+  setTimeout(() => logoScreen.classList.add('hidden'), 1000);
 
   // Attach event listeners once building screen is visible
   document.addEventListener('click', proceedToHome);
