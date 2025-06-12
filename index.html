@@ -156,8 +156,7 @@
     width: 90vw;
     height: auto;
   }
-      .building-screen {
-        font-size: 3rem;
+      $1 9rem;
         padding: 1rem;
         text-align: center;
       }
@@ -189,8 +188,8 @@
     We're Building Something
   </div>
 
-  <div class="menu">
-  <button class="menu-button" onclick="toggleDropdown()" aria-label="Menu" aria-expanded="false">
+  <div class="menu hidden" id="menu">
+  <button class="menu-button" onclick="toggleDropdown(event)" aria-label="Menu" aria-expanded="false">
     <div></div>
     <div></div>
     <div></div>
@@ -233,6 +232,8 @@
     const contactScreen = document.getElementById('contactScreen');
     const dropdownMenu = document.getElementById('dropdownMenu');
 
+
+
     setTimeout(() => {
   logoScreen.style.transition = 'opacity 1s ease';
   logoScreen.style.opacity = 0;
@@ -260,6 +261,7 @@
   logoScreen.classList.add('hidden');
   buildingScreen.classList.remove('active');
   buildingScreen.classList.add('hidden');
+  document.getElementById('menu').classList.remove('hidden');
   homeScreen.classList.add('active');
   document.removeEventListener('click', proceedToHome);
   document.removeEventListener('keydown', proceedToHome);
@@ -294,7 +296,8 @@
       dropdownMenu.classList.remove('show');
     }
 
-    function toggleDropdown() {
+    function toggleDropdown(event) {
+      event.stopPropagation();
       const isShown = dropdownMenu.classList.toggle('show');
       document.querySelector('.menu-button').setAttribute('aria-expanded', isShown);
     }
