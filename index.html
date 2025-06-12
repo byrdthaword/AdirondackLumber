@@ -38,8 +38,10 @@
       animation: fadeIn 1.5s ease forwards;
     }
     @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    
     }
     .logo {
       max-width: 100%;
@@ -48,11 +50,15 @@
     }
     .building-screen {
       font-size: 5.33rem;
+      opacity: 0;
+      transform: scale(0.95);
       animation: showBuilding 1.5s ease forwards;
       animation-delay: 4.5s;
     }
     @keyframes showBuilding {
-      to { opacity: 1; }
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
     }
     .home-screen, .about-screen, .contact-screen {
       display: none;
@@ -231,9 +237,15 @@
 
     setTimeout(() => {
   logoScreen.classList.remove('active');
-  logoScreen.classList.add('hidden');
+  logoScreen.style.transition = 'opacity 1s ease';
+  logoScreen.style.opacity = 0;
+  setTimeout(() => logoScreen.classList.add('hidden'), 1000);
   buildingScreen.classList.remove('hidden');
-  buildingScreen.classList.add('active');
+  setTimeout(() => buildingScreen.classList.add('active'), 100);
+
+  // Attach event listeners once building screen is visible
+  document.addEventListener('click', proceedToHome);
+  document.addEventListener('keydown', proceedToHome);
 }, 4500);
 
 
@@ -247,12 +259,10 @@
     };
 
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('.menu')) {
-        dropdownMenu.classList.remove('show');
-      } else {
-        proceedToHome();
-      }
-    });
+  if (!e.target.closest('.menu')) {
+    dropdownMenu.classList.remove('show');
+  }
+});
 
     document.addEventListener('keydown', proceedToHome);
 
