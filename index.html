@@ -48,13 +48,8 @@
   width: 90vw;
   height: auto;
 }
-    .building-screen {
-      font-size: 5.33rem;
-      opacity: 0;
-      transform: scale(0.95);
-      animation: showBuilding 1.5s ease forwards;
-      
-    }
+    transition: opacity 1s ease, transform 1s ease;
+}
     @keyframes showBuilding {
   0% { opacity: 0; transform: scale(0.95); }
   100% { opacity: 1; transform: scale(1); }
@@ -239,27 +234,36 @@
     const dropdownMenu = document.getElementById('dropdownMenu');
 
     setTimeout(() => {
-  logoScreen.classList.remove('active');
   logoScreen.style.transition = 'opacity 1s ease';
   logoScreen.style.opacity = 0;
-  buildingScreen.classList.remove('hidden');
-  buildingScreen.classList.add('active');
-  setTimeout(() => logoScreen.classList.add('hidden'), 1000);
 
-  // Attach event listeners once building screen is visible
+  setTimeout(() => {
+    logoScreen.classList.remove('active');
+    logoScreen.classList.add('hidden');
+    buildingScreen.classList.remove('hidden');
+    buildingScreen.style.transition = 'opacity 1s ease';
+    buildingScreen.style.opacity = 0;
+    setTimeout(() => {
+      buildingScreen.classList.add('fade-in');
+  buildingScreen.style.opacity = 1;
+    }, 50);
+  }, 1000);
+
   document.addEventListener('click', proceedToHome);
-  document.addEventListener('keydown', proceedToHome);
-}, 4500);
+  
+  }, 4500);
 
 
 
     const proceedToHome = () => {
-      buildingScreen.classList.remove('active');
-      buildingScreen.classList.add('hidden');
-      homeScreen.classList.add('active');
-      document.removeEventListener('click', proceedToHome);
-      document.removeEventListener('keydown', proceedToHome);
-    };
+  logoScreen.classList.remove('active');
+  logoScreen.classList.add('hidden');
+  buildingScreen.classList.remove('active');
+  buildingScreen.classList.add('hidden');
+  homeScreen.classList.add('active');
+  document.removeEventListener('click', proceedToHome);
+  document.removeEventListener('keydown', proceedToHome);
+};
 
     document.addEventListener('click', (e) => {
   if (!e.target.closest('.menu')) {
