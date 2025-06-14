@@ -285,9 +285,15 @@ window.addEventListener('DOMContentLoaded', () => {
 };
 
     function landingClickHandler(e) {
-  if (!introComplete) {
+  const isMenuRelated = e.target.closest('.menu') || e.target.closest('#menuButton');
+
+  if (!introComplete && !isMenuRelated) {
     proceedToHome();
-  } else {
+  } else if (introComplete && !e.target.closest('.menu')) {
+    dropdownMenu.classList.remove('show');
+    document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
+  }
+} else {
     // Allow dropdown to close if open and clicked outside
     if (!e.target.closest('.menu')) {
       dropdownMenu.classList.remove('show');
