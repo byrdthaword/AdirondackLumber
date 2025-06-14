@@ -90,11 +90,22 @@
     }
 
     .home-screen, .about-screen, .contact-screen {
-      display: none;
-      flex-direction: column;
-      padding: 2rem;
-      position: relative;
-    }
+  display: none;
+  flex-direction: column;
+  padding: 2rem;
+  position: relative;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.44s cubic-bezier(.77,0,.18,1), transform 0.44s cubic-bezier(.77,0,.18,1);
+}
+.about-screen.active, .contact-screen.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
     .home-screen.active,
     .about-screen.active,
@@ -127,7 +138,26 @@
   border: none;
   padding: 0;
   touch-action: manipulation;
+  border-radius: 8px;
+  transition: box-shadow 0.2s;
 }
+.menu-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(110,110,130,0.19);
+}
+.menu-button .bar {
+  transition: all 0.26s cubic-bezier(.77,0,.18,1);
+}
+.menu-button.open .bar1 {
+  transform: translateY(6px) rotate(45deg);
+}
+.menu-button.open .bar2 {
+  opacity: 0;
+}
+.menu-button.open .bar3 {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
 
     .dropdown {
   display: block;
@@ -180,22 +210,41 @@
 }
 
     .homepage-logo {
-      max-width: 533px;
-      border: 4px solid #1a1a1a;
-      padding: 1rem;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+  max-width: 533px;
+  border: 4px solid #1a1a1a;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(.77,0,.18,1), transform 0.25s cubic-bezier(.77,0,.18,1), box-shadow 0.25s cubic-bezier(.77,0,.18,1);
+}
+.homepage-logo.visible {
+  opacity: 1;
+}
+.homepage-logo:hover, .homepage-logo:focus {
+  transform: scale(1.02);
+  box-shadow: 0 8px 40px 0 rgba(30,30,40,0.10), 0 2px 12px rgba(60,60,60,0.07);
+  outline: none;
+}
+
 
     .embellishment {
-      position: absolute;
-      width: 100%;
-      text-align: center;
-      top: 90%;
-      font-style: italic;
-      font-size: 0.9rem;
-      color: #444;
-    }
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 90%;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #888;
+  opacity: 0;
+  transition: opacity 0.7s 0.5s cubic-bezier(.77,0,.18,1);
+  pointer-events: none;
+}
+.embellishment.visible {
+  opacity: 0.82;
+  pointer-events: auto;
+}
+
 
     :root {
   --contact-accent: #bcbcbc;
@@ -246,8 +295,17 @@
   padding: 0.7rem 0 0.4rem 0;
   font-family: inherit;
   color: #222;
-  transition: border-color 0.16s, background 0.16s;
+  transition: border-color 0.16s, background 0.16s, box-shadow 0.16s;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: border-color 0.16s, background 0.16s, box-shadow 0.16s, opacity 0.44s, transform 0.44s;
 }
+.contact-screen form input[type="text"].visible,
+.contact-screen form input[type="email"].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .contact-screen form input[type="text"]:focus,
 .contact-screen form input[type="email"]:focus {
   border-bottom: 2px solid var(--contact-accent-hover);
@@ -291,12 +349,9 @@
         height: 18px;
       }
 
-      
-
       .dropdown {
         font-size: 0.9rem;
       }
-
       
     }
   @keyframes dropdownFade {
@@ -318,15 +373,15 @@
   <nav class="menu hidden menu-hide-intro" id="menu" role="navigation" aria-label="Main navigation">
     <button class="menu-button" id="menuButton" aria-label="Menu" aria-expanded="false" style="padding: 0.25rem; width: auto; height: auto; display: flex; align-items: center; justify-content: center;">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="pointer-events: none;">
-    <line x1="3" y1="12" x2="21" y2="12" stroke="black" stroke-width="2" />
-    <line x1="3" y1="6" x2="21" y2="6" stroke="black" stroke-width="2" />
-    <line x1="3" y1="18" x2="21" y2="18" stroke="black" stroke-width="2" />
-  </svg>
+  <rect class="bar bar1" x="3" y="6" width="18" height="2" rx="1" fill="black" />
+  <rect class="bar bar2" x="3" y="11" width="18" height="2" rx="1" fill="black" />
+  <rect class="bar bar3" x="3" y="16" width="18" height="2" rx="1" fill="black" />
+</svg>
 </button>
     <div class="dropdown" id="dropdownMenu" role="menu" aria-label="Dropdown navigation">
-      <a href="#" id="link-home" onclick="navigate('home')" role="menuitem" tabindex="0">Home</a>
-      <a href="#" id="link-about" onclick="navigate('about')" role="menuitem" tabindex="0">About</a>
-      <a href="#" id="link-contact" onclick="navigate('contact')" role="menuitem" tabindex="0">Contact</a>
+      <a href="#" id="link-home" role="menuitem" tabindex="0">Home</a>
+      <a href="#" id="link-about" role="menuitem" tabindex="0">About</a>
+      <a href="#" id="link-contact" role="menuitem" tabindex="0">Contact</a>
     </div>
   </nav>
   <div class="screen home-screen" id="homeScreen">
@@ -364,6 +419,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const contactScreen = document.getElementById('contactScreen');
     const dropdownMenu = document.getElementById('dropdownMenu');
     const menu = document.getElementById('menu');
+    const homepageLogo = document.querySelector('.homepage-logo');
+    const embellishment = document.querySelector('.embellishment');
+setTimeout(() => { homepageLogo.classList.add('visible'); }, 100);
+setTimeout(() => { embellishment.classList.add('visible'); }, 800);
 
     setTimeout(() => {
   // Animate logo out
@@ -431,6 +490,23 @@ if (value === 'home') {
 } else if (value === 'contact') {
  document.getElementById('link-contact').classList.add('active');
 }
+  // Reset About/Contact animations
+aboutScreen.classList.remove('active');
+contactScreen.classList.remove('active');
+contactScreen.querySelectorAll('input[type="text"], input[type="email"]').forEach(el => el.classList.remove('visible'));
+
+setTimeout(() => {
+  if (value === 'about') {
+    aboutScreen.classList.add('active');
+  } else if (value === 'contact') {
+    contactScreen.classList.add('active');
+    // Stagger contact form fields
+    const fields = contactScreen.querySelectorAll('input[type="text"], input[type="email"]');
+    fields.forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 140 + i * 120);
+    });
+  }
+}, 60);
 dropdownMenu.classList.remove('show');
 document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
 }
@@ -441,6 +517,11 @@ menuButton.addEventListener('click', function(event) {
   event.stopPropagation();
   const isShown = dropdownMenu.classList.toggle('show');
   menuButton.setAttribute('aria-expanded', isShown ? "true" : "false");
+  if (isShown) {
+  menuButton.classList.add('open');
+} else {
+  menuButton.classList.remove('open');
+}
 });
   document.addEventListener('keydown', function(e) {
   if (!introComplete) {
