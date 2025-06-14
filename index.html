@@ -11,7 +11,7 @@
   <meta property="og:image" content="/logo.jpeg" />
   <meta property="og:url" content="https://yourdomain.com" />
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Adirondack Lumber Company</title>
   <style>
     * {
@@ -142,6 +142,7 @@
 }
 
     .dropdown a {
+  min-height: 44px;
   border: 1px solid black;
   border-radius: 3px;
   display: block;
@@ -223,7 +224,15 @@
         font-size: 0.9rem;
       }
     }
-  </style>
+  @keyframes dropdownFade {
+  from { opacity: 0; transform: scaleY(0.9); }
+  to { opacity: 1; transform: scaleY(1); }
+}
+
+.dropdown.show {
+  animation: dropdownFade 0.25s ease-out;
+}
+</style>
 </head>
 <body>
   <div class="screen logo-screen active" id="logoScreen">
@@ -316,7 +325,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
     document.addEventListener('click', landingClickHandler);
 
-function navigate(value) {
+window.navigate = function(value) {
       homeScreen.classList.remove('active');
       aboutScreen.classList.remove('active');
       contactScreen.classList.remove('active');
