@@ -291,10 +291,8 @@
     }
     proceedToHome();
     document.removeEventListener('click', landingClickHandler);
-    document.removeEventListener('keydown', keydownHandler);
+    document.removeEventListener('keydown', introKeyHandler);
   }
-}
-    proceedToHome();
     document.removeEventListener('click', landingClickHandler);
   }
 }
@@ -302,16 +300,12 @@
     document.addEventListener('click', landingClickHandler);
 
   
-    function keydownHandler(e) {
+    function introKeyHandler(e) {
   if (!homeScreen.classList.contains('active')) {
     proceedToHome();
   }
-  if (e.key === 'Escape') {
-    dropdownMenu.classList.remove('show');
-    document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
-  }
 }
-document.addEventListener('keydown', keydownHandler);
+document.addEventListener('keydown', introKeyHandler);
 
     function navigate(value) {
       homeScreen.classList.remove('active');
@@ -353,4 +347,3 @@ menuButton.addEventListener('click', function(event) {
 </script>
 </body>
 </html>
-
