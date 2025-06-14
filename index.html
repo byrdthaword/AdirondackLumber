@@ -53,7 +53,27 @@
     }
 
     @keyframes fadeIn {
-      0% { opacity: 0; transform: scale(0.95); }
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes logoExit {
+  to {
+    opacity: 0;
+    transform: translateY(-60px) scale(0.95);
+  }
+}
+@keyframes buildingEnter {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
       100% { opacity: 1; transform: scale(1); }
     }
 
@@ -293,10 +313,16 @@ window.addEventListener('DOMContentLoaded', () => {
     const menu = document.getElementById('menu');
 
     setTimeout(() => {
-  logoScreen.classList.remove('active');
-  logoScreen.classList.add('hidden');
-  buildingScreen.classList.remove('hidden');
-  buildingScreen.classList.add('active');
+  // Animate logo out
+  logoScreen.style.animation = 'logoExit 0.6s forwards';
+
+  setTimeout(() => {
+    logoScreen.classList.remove('active');
+    logoScreen.classList.add('hidden');
+    buildingScreen.classList.remove('hidden');
+    buildingScreen.classList.add('active');
+    buildingScreen.style.animation = 'buildingEnter 0.6s forwards';
+  }, 600); // match logoExit animation
 }, 2700);
 
     const proceedToHome = () => {
