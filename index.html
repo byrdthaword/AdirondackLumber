@@ -511,17 +511,26 @@ dropdownMenu.classList.remove('show');
 document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
 }
 
-    const menuButton = document.getElementById('menuButton');
+   const menuButton = document.getElementById('menuButton');
 menuButton.addEventListener('click', function(event) {
   if (!introComplete) return;
   event.stopPropagation();
   const isShown = dropdownMenu.classList.toggle('show');
   menuButton.setAttribute('aria-expanded', isShown ? "true" : "false");
   if (isShown) {
-  menuButton.classList.add('open');
-} else {
-  menuButton.classList.remove('open');
-}
+    menuButton.classList.add('open');
+  } else {
+    menuButton.classList.remove('open');
+  }
+});
+dropdownMenu.addEventListener('click', function(e) {
+  if (e.target.matches('a[role="menuitem"]')) {
+    e.preventDefault();
+    const id = e.target.id;
+    if (id === 'link-home') window.navigate('home');
+    else if (id === 'link-about') window.navigate('about');
+    else if (id === 'link-contact') window.navigate('contact');
+  }
 });
   document.addEventListener('keydown', function(e) {
   if (!introComplete) {
@@ -537,3 +546,4 @@ menuButton.addEventListener('click', function(event) {
 </script>
 </body>
 </html>
+
