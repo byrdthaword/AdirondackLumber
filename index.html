@@ -103,7 +103,11 @@
     }
 
     .dropdown {
-  display: none;
+  transform-origin: top left;
+  transform: scaleY(0);
+  opacity: 0;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  display: flex;
   flex-direction: column;
   position: absolute;
   top: 3rem;
@@ -114,17 +118,13 @@
   font-weight: bold;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 10;
   pointer-events: none;
 }
 
     .dropdown.show {
-  display: flex;
+  transform: scaleY(1);
   opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
 }
 
@@ -219,10 +219,10 @@
 
   <div class="menu hidden" id="menu">
     <button class="menu-button" id="menuButton" aria-label="Menu" aria-expanded="false">
-      <div></div>
-      <div></div>
-      <div></div>
-    </button>
+  <div></div>
+  <div></div>
+  <div></div>
+</button>
     <div class="dropdown" id="dropdownMenu">
       <a href="#" id="link-home" onclick="navigate('home')">Home</a>
       <a href="#" id="link-about" onclick="navigate('about')">About</a>
