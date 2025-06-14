@@ -251,6 +251,58 @@
 
 .dropdown.show {
   animation: dropdownFade 0.25s ease-out;
+  .contact-screen form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  gap: 2rem;
+  background: none;
+  padding: 2.5rem 1rem 2rem 1rem;
+  margin: 0 auto;
+  box-shadow: none;
+}
+.contact-screen form label {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  align-self: flex-start;
+}
+.contact-screen form input[type="text"],
+.contact-screen form input[type="email"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid #888;
+  background: transparent;
+  font-size: 1.1rem;
+  padding: 0.5rem 0;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.contact-screen form input[type="text"]:focus,
+.contact-screen form input[type="email"]:focus {
+  border-bottom: 2px solid #1a1a1a;
+}
+.contact-screen form input[type="submit"] {
+  background: none;
+  border: 1.5px solid #1a1a1a;
+  color: #1a1a1a;
+  font-size: 1.1rem;
+  border-radius: 999px;
+  padding: 0.6rem 2.5rem;
+  font-family: inherit;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: background 0.15s, color 0.15s, border 0.15s;
+}
+.contact-screen form input[type="submit"]:hover,
+.contact-screen form input[type="submit"]:focus {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #1a1a1a;
 }
 </style>
 </head>
@@ -287,6 +339,7 @@
   </div>
 
   <div class="screen contact-screen" id="contactScreen">
+    <h2 style="font-family:'Georgia',serif;font-size:1.8rem;font-weight:400;margin-bottom:1.5rem;letter-spacing:0.02em;color:#111;">Contact</h2>
     <form>
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required />
@@ -323,7 +376,7 @@ window.addEventListener('DOMContentLoaded', () => {
     buildingScreen.classList.add('active');
     buildingScreen.style.animation = 'buildingEnter 0.33s forwards';
   }, 330); // match logoExit animation
-}, 1800);
+}, 1200);
 
     const proceedToHome = () => {
   console.log('Proceeding to home...');
