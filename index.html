@@ -293,13 +293,6 @@ window.addEventListener('DOMContentLoaded', () => {
     dropdownMenu.classList.remove('show');
     document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
   }
-} else {
-    // Allow dropdown to close if open and clicked outside
-    if (!e.target.closest('.menu')) {
-      dropdownMenu.classList.remove('show');
-      document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
-    }
-  }
 }
     
     document.addEventListener('click', landingClickHandler);
