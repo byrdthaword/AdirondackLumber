@@ -36,7 +36,7 @@
       justify-content: center;
       align-items: center;
       opacity: 0;
-      transition: opacity 1s ease;
+      transition: opacity 0.33s cubic-bezier(.77,0,.18,1);
     }
 
     .screen.active {
@@ -44,6 +44,12 @@
       z-index: 1;
     }
 
+    .screen.fade-out {
+      opacity: 0 !important;
+      transition: opacity 0.33s cubic-bezier(.77,0,.18,1);
+      pointer-events: none;
+    }
+    
     .hidden {
       display: none;
     }
@@ -411,7 +417,7 @@ if (currentlyActive && currentlyActive !== toShow) {
  setTimeout(() => {
    screens.forEach(screen => screen.classList.remove('active', 'fade-out'));
    toShow.classList.add('active');
- }, 600); // Match fade-out duration
+ }, 330); // Match fade-out duration
 } else {
  screens.forEach(screen => screen.classList.remove('active', 'fade-out'));
  toShow.classList.add('active');
