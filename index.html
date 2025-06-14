@@ -218,7 +218,7 @@
   </div>
 
   <div class="menu hidden" id="menu">
-    <button class="menu-button" onclick="toggleDropdown(event)" aria-label="Menu" aria-expanded="false">
+    <button class="menu-button" id="menuButton" aria-label="Menu" aria-expanded="false">
       <div></div>
       <div></div>
       <div></div>
@@ -320,11 +320,12 @@
       document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
     }
 
-    function toggleDropdown(event) {
-      event.stopPropagation();
-      const isShown = dropdownMenu.classList.toggle('show');
-      document.querySelector('.menu-button').setAttribute('aria-expanded', isShown);
-    }
+    const menuButton = document.getElementById('menuButton');
+menuButton.addEventListener('click', function(event) {
+  event.stopPropagation();
+  const isShown = dropdownMenu.classList.toggle('show');
+  menuButton.setAttribute('aria-expanded', isShown);
+});
   document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     dropdownMenu.classList.remove('show');
