@@ -254,22 +254,7 @@
     const dropdownMenu = document.getElementById('dropdownMenu');
     const menu = document.getElementById('menu');
 
-    setTimeout(() => {
-      logoScreen.style.transition = 'opacity 1s ease';
-      logoScreen.style.opacity = 0;
-
-      setTimeout(() => {
-        logoScreen.classList.remove('active');
-        logoScreen.classList.add('hidden');
-        buildingScreen.classList.remove('hidden');
-        buildingScreen.style.transition = 'opacity 1s ease';
-        buildingScreen.style.opacity = 0;
-        setTimeout(() => {
-          buildingScreen.classList.add('fade-in');
-          buildingScreen.style.opacity = 1;
-        }, 50);
-      }, 1000);
-    }, 4500);
+    setTimeout(() => {}, 2700);
 
     const proceedToHome = () => {
       logoScreen.classList.remove('active');
@@ -283,12 +268,14 @@
     };
 
     function landingClickHandler(e) {
-      if (!e.target.closest('.menu')) {
-        dropdownMenu.classList.remove('show');
-        document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
-      }
-      proceedToHome();
+  if (logoScreen.classList.contains('active') || buildingScreen.classList.contains('active')) {
+    if (!e.target.closest('.menu')) {
+      dropdownMenu.classList.remove('show');
+      document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
     }
+    proceedToHome();
+  }
+}
 
     document.addEventListener('click', landingClickHandler);
     document.addEventListener('keydown', proceedToHome);
