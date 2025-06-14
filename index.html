@@ -257,6 +257,7 @@
   </div>
 
   <script>
+window.addEventListener('DOMContentLoaded', () => {
     let introComplete = false;
     const logoScreen = document.getElementById('logoScreen');
     const buildingScreen = document.getElementById('buildingScreen');
@@ -297,12 +298,7 @@
     
     document.addEventListener('click', landingClickHandler);
 
-  
-    
-}
-
-
-    function navigate(value) {
+function navigate(value) {
       homeScreen.classList.remove('active');
       aboutScreen.classList.remove('active');
       contactScreen.classList.remove('active');
@@ -341,6 +337,7 @@ menuButton.addEventListener('click', function(event) {
 });
 
 
+});
 </script>
 </body>
 </html>
