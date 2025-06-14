@@ -324,7 +324,7 @@ menuButton.addEventListener('click', function(event) {
   if (!homeScreen.classList.contains('active')) return;
   event.stopPropagation();
   const isShown = dropdownMenu.classList.toggle('show');
-  menuButton.setAttribute('aria-expanded', isShown);
+  menuButton.setAttribute('aria-expanded', isShown ? "true" : "false");
 });
   document.addEventListener('keydown', function(e) {
   if (!introComplete) {
