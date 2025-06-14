@@ -289,7 +289,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   if (!introComplete && !isMenuRelated) {
     proceedToHome();
-  } else if (introComplete && !e.target.closest('.menu')) {
+  } else if (introComplete && !menu.contains(e.target)) {
     dropdownMenu.classList.remove('show');
     document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
   }
