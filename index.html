@@ -285,7 +285,7 @@ window.addEventListener('DOMContentLoaded', () => {
 };
 
     function landingClickHandler(e) {
-  const isMenuRelated = e.target.closest('.menu') || e.target.closest('#menuButton');
+  const isMenuRelated = menu.contains(e.target);
 
   if (!introComplete && !isMenuRelated) {
     proceedToHome();
