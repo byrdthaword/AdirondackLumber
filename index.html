@@ -218,10 +218,12 @@
   </div>
 
   <div class="menu hidden" id="menu">
-    <button class="menu-button" id="menuButton" aria-label="Menu" aria-expanded="false">
-  <div></div>
-  <div></div>
-  <div></div>
+    <button class="menu-button" id="menuButton" aria-label="Menu" aria-expanded="false" style="padding: 0.25rem; width: auto; height: auto; display: flex; align-items: center; justify-content: center;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="3" y1="12" x2="21" y2="12" />
+    <line x1="3" y1="6" x2="21" y2="6" />
+    <line x1="3" y1="18" x2="21" y2="18" />
+  </svg>
 </button>
     <div class="dropdown" id="dropdownMenu">
       <a href="#" id="link-home" onclick="navigate('home')">Home</a>
@@ -288,6 +290,8 @@
       document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
     }
     proceedToHome();
+    document.removeEventListener('click', landingClickHandler);
+  }
   }
 }
 
