@@ -105,6 +105,10 @@
   left: 1rem;
   z-index: 9999;
 }
+    .menu.menu-hide-intro {
+  display: none !important;
+}
+
 
     .menu-button {
   display: flex;
@@ -305,7 +309,7 @@
     We're Building Something
   </div>
 
-  <nav class="menu hidden" id="menu" role="navigation" aria-label="Main navigation">
+  <nav class="menu hidden menu-hide-intro" id="menu" role="navigation" aria-label="Main navigation">
     <button class="menu-button" id="menuButton" aria-label="Menu" aria-expanded="false" style="padding: 0.25rem; width: auto; height: auto; display: flex; align-items: center; justify-content: center;">
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="pointer-events: none;">
     <line x1="3" y1="12" x2="21" y2="12" stroke="black" stroke-width="2" />
@@ -366,14 +370,14 @@ window.addEventListener('DOMContentLoaded', () => {
     buildingScreen.classList.add('active');
     buildingScreen.style.animation = 'buildingEnter 0.33s forwards';
   }, 330); // match logoExit animation
-}, 1200);
+}, 1900);
 
     const proceedToHome = () => {
     logoScreen.classList.remove('active');
   logoScreen.classList.add('hidden');
   buildingScreen.classList.remove('active');
   buildingScreen.classList.add('hidden');
-  menu.classList.remove('hidden');
+  menu.classList.remove('hidden', 'menu-hide-intro');
   setTimeout(() => {
     homeScreen.classList.add('active');
   }, 50);
