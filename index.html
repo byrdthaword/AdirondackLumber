@@ -280,7 +280,7 @@
       menu.classList.remove('hidden');
       homeScreen.classList.add('active');
       document.removeEventListener('click', landingClickHandler);
-      document.removeEventListener('keydown', proceedToHome);
+      
     };
 
     function landingClickHandler(e) {
@@ -295,6 +295,10 @@
 }
 
     document.addEventListener('click', landingClickHandler);
+
+  const isShown = dropdownMenu.classList.toggle('show');
+  menuButton.setAttribute('aria-expanded', isShown);
+});
     document.addEventListener('keydown', (e) => {
   if (!homeScreen.classList.contains('active')) {
     proceedToHome();
@@ -324,6 +328,13 @@
     }
 
     const menuButton = document.getElementById('menuButton');
+if (menuButton) {
+  menuButton.addEventListener('click', function(event) {
+    event.stopPropagation();
+    const isShown = dropdownMenu.classList.toggle('show');
+    menuButton.setAttribute('aria-expanded', isShown);
+  });
+}
 menuButton.addEventListener('click', function(event) {
   event.stopPropagation();
   const isShown = dropdownMenu.classList.toggle('show');
