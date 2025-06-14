@@ -398,28 +398,36 @@ window.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', landingClickHandler);
 
 window.navigate = function(value) {
-  buildingScreen.classList.remove('active');
-  buildingScreen.classList.add('hidden');
-  homeScreen.classList.remove('active');
-  aboutScreen.classList.remove('active');
-      contactScreen.classList.remove('active');
+const screens = [homeScreen, aboutScreen, contactScreen];
+const toShow = value === 'home' ? homeScreen : value === 'about' ? aboutScreen : contactScreen;
+const currentlyActive = screens.find(screen => screen.classList.contains('active'));
 
-      document.querySelectorAll('.dropdown a').forEach(link => link.classList.remove('active'));
+// Remove active from building screen
+buildingScreen.classList.remove('active');
+buildingScreen.classList.add('hidden');
 
-      if (value === 'home') {
-        homeScreen.classList.add('active');
-        document.getElementById('link-home').classList.add('active');
-      } else if (value === 'about') {
-        aboutScreen.classList.add('active');
-        document.getElementById('link-about').classList.add('active');
-      } else if (value === 'contact') {
-        contactScreen.classList.add('active');
-        document.getElementById('link-contact').classList.add('active');
-      }
+if (currentlyActive && currentlyActive !== toShow) {
+ currentlyActive.classList.add('fade-out');
+ setTimeout(() => {
+   screens.forEach(screen => screen.classList.remove('active', 'fade-out'));
+   toShow.classList.add('active');
+ }, 600); // Match fade-out duration
+} else {
+ screens.forEach(screen => screen.classList.remove('active', 'fade-out'));
+ toShow.classList.add('active');
+}
 
-      dropdownMenu.classList.remove('show');
-      document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
-    }
+document.querySelectorAll('.dropdown a').forEach(link => link.classList.remove('active'));
+if (value === 'home') {
+ document.getElementById('link-home').classList.add('active');
+} else if (value === 'about') {
+ document.getElementById('link-about').classList.add('active');
+} else if (value === 'contact') {
+ document.getElementById('link-contact').classList.add('active');
+}
+dropdownMenu.classList.remove('show');
+document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
+}
 
     const menuButton = document.getElementById('menuButton');
 menuButton.addEventListener('click', function(event) {
