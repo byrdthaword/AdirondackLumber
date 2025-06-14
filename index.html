@@ -134,9 +134,7 @@
   padding: 0.75rem 1.25rem;
   transition: background-color 0.2s ease;
 }
-}
-
-    .dropdown a:hover,
+.dropdown a:hover,
 .dropdown a:focus {
   background-color: #e0ddd8;
   outline: none;
@@ -284,7 +282,7 @@
     };
 
     function landingClickHandler(e) {
-  if (logoScreen.classList.contains('active') || buildingScreen.classList.contains('active')) {
+  if (!homeScreen.classList.contains('active')) {
     if (!e.target.closest('.menu')) {
       dropdownMenu.classList.remove('show');
       document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
@@ -294,7 +292,11 @@
 }
 
     document.addEventListener('click', landingClickHandler);
-    document.addEventListener('keydown', proceedToHome);
+    document.addEventListener('keydown', (e) => {
+  if (!homeScreen.classList.contains('active')) {
+    proceedToHome();
+  }
+});
 
     function navigate(value) {
       homeScreen.classList.remove('active');
