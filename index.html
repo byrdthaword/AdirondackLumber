@@ -100,9 +100,10 @@
 
     .menu {
   display: block;
-  position: absolute;
+  position: fixed;
   top: 1rem;
   left: 1rem;
+  z-index: 9999;
 }
 
     .menu-button {
@@ -117,13 +118,6 @@
   padding: 0;
   touch-action: manipulation;
 }
-
-    .menu-button div {
-      width: 100%;
-      height: 4px;
-      background-color: #1a1a1a;
-      transition: all 0.3s ease;
-    }
 
     .dropdown {
   display: block;
@@ -147,7 +141,12 @@
   pointer-events: none;
 }
 
-    
+    .dropdown.show {
+  visibility: visible;
+  transform: scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
+}
 
     .dropdown a {
   min-height: 44px;
@@ -282,17 +281,13 @@
         height: 18px;
       }
 
-      .menu-button div {
-        height: 3px;
-      }
+      
 
       .dropdown {
         font-size: 0.9rem;
       }
 
-      input, select {
-        font-size: 0.9rem;
-      }
+      
     }
   @keyframes dropdownFade {
   from { opacity: 0; transform: scaleY(0.9); }
