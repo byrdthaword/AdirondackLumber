@@ -275,6 +275,7 @@ window.addEventListener('DOMContentLoaded', () => {
 }, 2700);
 
     const proceedToHome = () => {
+  console.log('Proceeding to home...');
   logoScreen.classList.remove('active');
   logoScreen.classList.add('hidden');
   buildingScreen.classList.remove('active');
@@ -321,6 +322,9 @@ function navigate(value) {
 
     const menuButton = document.getElementById('menuButton');
 menuButton.addEventListener('click', function(event) {
+  console.log('Menu button clicked');
+  console.log('Menu hidden?', menu.classList.contains('hidden'));
+  console.log('Dropdown was shown?', dropdownMenu.classList.contains('show'));
   if (!homeScreen.classList.contains('active')) return;
   event.stopPropagation();
   const isShown = dropdownMenu.classList.toggle('show');
