@@ -352,7 +352,7 @@ menuButton.addEventListener('click', function(event) {
   console.log('Menu button clicked');
   console.log('Menu hidden?', menu.classList.contains('hidden'));
   console.log('Dropdown was shown?', dropdownMenu.classList.contains('show'));
-  if (!homeScreen.classList.contains('active')) return;
+  if (!introComplete) return;
   event.stopPropagation();
   const isShown = dropdownMenu.classList.toggle('show');
   menuButton.setAttribute('aria-expanded', isShown ? "true" : "false");
