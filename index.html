@@ -257,6 +257,7 @@
   </div>
 
   <script>
+    let introComplete = false;
     const logoScreen = document.getElementById('logoScreen');
     const buildingScreen = document.getElementById('buildingScreen');
     const homeScreen = document.getElementById('homeScreen');
@@ -273,22 +274,26 @@
 }, 2700);
 
     const proceedToHome = () => {
-      logoScreen.classList.remove('active');
-      logoScreen.classList.add('hidden');
-      buildingScreen.classList.remove('active');
-      buildingScreen.classList.add('hidden');
-      menu.classList.remove('hidden');
-      homeScreen.classList.add('active');
-      
-      
-    };
+  logoScreen.classList.remove('active');
+  logoScreen.classList.add('hidden');
+  buildingScreen.classList.remove('active');
+  buildingScreen.classList.add('hidden');
+  menu.classList.remove('hidden');
+  homeScreen.classList.add('active');
+  introComplete = true;
+};
 
     function landingClickHandler(e) {
-  if (!homeScreen.classList.contains('active')) {
+  if (!introComplete) {
+    proceedToHome();
+  } else {
+    // Allow dropdown to close if open and clicked outside
     if (!e.target.closest('.menu')) {
       dropdownMenu.classList.remove('show');
       document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
     }
+  }
+}
     proceedToHome();
     document.removeEventListener('click', landingClickHandler);
     document.removeEventListener('keydown', introKeyHandler);
@@ -299,11 +304,14 @@
 
   
     function introKeyHandler(e) {
-  if (!homeScreen.classList.contains('active')) {
+  if (!introComplete) {
     proceedToHome();
-    document.removeEventListener('click', landingClickHandler);
-    document.removeEventListener('keydown', introKeyHandler);
   }
+  if (e.key === 'Escape') {
+    dropdownMenu.classList.remove('show');
+    document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
+  }
+}
 }
 document.addEventListener('keydown', introKeyHandler);
 
