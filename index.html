@@ -298,15 +298,7 @@
     document.addEventListener('click', landingClickHandler);
 
   
-    function introKeyHandler(e) {
-  if (!introComplete) {
-    proceedToHome();
-  }
-  if (e.key === 'Escape') {
-    dropdownMenu.classList.remove('show');
-    document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
-  }
-}
+    
 }
 
 
@@ -352,4 +344,3 @@ menuButton.addEventListener('click', function(event) {
 </script>
 </body>
 </html>
-
