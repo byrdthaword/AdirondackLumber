@@ -293,8 +293,6 @@
     document.removeEventListener('click', landingClickHandler);
     document.removeEventListener('keydown', introKeyHandler);
   }
-    document.removeEventListener('click', landingClickHandler);
-  }
 }
 
     document.addEventListener('click', landingClickHandler);
@@ -303,6 +301,8 @@
     function introKeyHandler(e) {
   if (!homeScreen.classList.contains('active')) {
     proceedToHome();
+    document.removeEventListener('click', landingClickHandler);
+    document.removeEventListener('keydown', introKeyHandler);
   }
 }
 document.addEventListener('keydown', introKeyHandler);
